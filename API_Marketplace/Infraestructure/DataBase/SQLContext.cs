@@ -13,14 +13,6 @@ namespace API_Marketplace.Infraestructure.DataBase
         public DbSet<Produto> Produtos { get; set; }
 
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Produto>(e =>
-        //    {
-        //        e.Property(pro => pro.Nome).HasColumnName("Nome");
-        //    });
-        //}
-
 
 
     }

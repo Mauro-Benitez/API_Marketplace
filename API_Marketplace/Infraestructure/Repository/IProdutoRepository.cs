@@ -4,12 +4,10 @@ namespace API_Marketplace.Infraestructure.Repository
 {
     public interface IProdutoRepository
     {
-        Produto Inserir(Produto produto);
-
-        List<Produto> Listar();
-        
-        Produto GetById(int id);
-
-        void Deletar (Produto produto);
+        Produto InserirProduto(Produto produto);
+        Produto AtualizarProduto(Produto produto);
+        List<Produto> ListarProdutos();        
+        Produto GetByIdProduto(Guid Id);
+        void DeletarProduto (Guid Id);
     }
 }

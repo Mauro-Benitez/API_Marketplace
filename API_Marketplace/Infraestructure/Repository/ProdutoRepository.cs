@@ -1,31 +1,64 @@
 ﻿using API_Marketplace.Domain.Entities;
+using API_Marketplace.Infraestructure.DataBase;
 
 namespace API_Marketplace.Infraestructure.Repository
 {
     public class ProdutoRepository : IProdutoRepository
     {
+        private readonly SQLContext _sqlContext;
 
-
-
-
-        public void Deletar(Produto produto)
+        public ProdutoRepository(SQLContext sqlContext)
         {
-            throw new NotImplementedException();
+            _sqlContext = sqlContext;
         }
 
-        public Produto GetById(int id)
+        public Produto AtualizarProduto(Produto produto)
         {
-            throw new NotImplementedException();
+             var prodDB = GetByIdProduto(produto.Id);
+
+            if (prodDB is null) throw new ArgumentException("Produto não encontrado.");
+
+            _sqlContext.Produtos.Entry(prodDB).CurrentValues.SetValues(produto);
+            _sqlContext.SaveChanges();
+            return prodDB;
         }
 
-        public Produto Inserir(Produto produto)
+        public void DeletarProduto(Guid Id)
         {
-            throw new NotImplementedException();
+            var result = _sqlContext.Produtos.FirstOrDefault(p => p.Id.Equals(Id));
+
+            if(result == null)
+            {
+                throw new ArgumentException("Produto não encontrado.");
+            }
+
+            _sqlContext.Produtos.Remove(result);
+            _sqlContext.SaveChanges();
         }
 
-        public List<Produto> Listar()
+        public Produto GetByIdProduto(Guid id)
         {
-            throw new NotImplementedException();
+            var result = _sqlContext.Produtos.FirstOrDefault(p => p.Id == id);
+
+            if(result == null)
+            {
+                throw new ArgumentException("Produto não encontrado.");
+            }
+
+            return result;
+        }
+
+        public Produto InserirProduto(Produto produto)
+        {
+            _sqlContext.Produtos.Add(produto);
+            _sqlContext.SaveChanges();
+            return produto;
+        
+        }
+
+        public List<Produto> ListarProdutos()
+        {
+            return _sqlContext.Produtos.ToList();           
         }
     }
 }
