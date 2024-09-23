@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Data.SqlClient;
+using System.Reflection;
 using System.Text;
 
 
@@ -43,7 +44,15 @@ builder.Services.AddAuthentication(x =>
 //** Nesse bloco configuramos o swagger para nos possibilitar a inclusão do nosso JWT **//
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Aula 6 - Autenticação e Autorização", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api Basic - MarketPlace ", Version = "v1" });
+
+
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile) ;
+    c.IncludeXmlComments(xmlPath);
+
+
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description =

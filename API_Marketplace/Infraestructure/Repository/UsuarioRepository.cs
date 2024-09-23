@@ -12,6 +12,12 @@ namespace API_Marketplace.Infraestructure.Repository
             _context = context;
         }
 
+
+        /// <summary>
+        /// Método responsável por cadastrar um novo usuário no banco de dados
+        /// </summary>
+        /// <param name="usuario">Usuário novo a ser cadastrado</param>
+        /// <returns>Retorna o usuário cadastrado</returns>
         public Usuario NovoUsuario(Usuario usuario)
         {      
             _context.Add(usuario);

@@ -16,6 +16,11 @@ namespace API_Marketplace.Controllers
             _tokenService = tokenService;
         }
 
+        /// <summary>
+        /// Passar login e senha para gerar um novo token.      
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
         [HttpPost]       
         public IActionResult CreateToken([FromBody] Usuario usuario)
         {

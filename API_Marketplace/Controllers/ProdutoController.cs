@@ -1,5 +1,6 @@
 using API_Marketplace.Domain.Entities;
 using API_Marketplace.Infraestructure.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_Marketplace.Controllers
@@ -16,7 +17,13 @@ namespace API_Marketplace.Controllers
             _productRepository = productRepository;
         }
 
+        /// <summary>
+        /// Retorna todos os produtos cadastrados.
+        /// Necessário se autenticar.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Produces(typeof(List<Produto>))]
@@ -26,7 +33,15 @@ namespace API_Marketplace.Controllers
             return Ok(result);
         }
 
+
+        /// <summary>
+        /// Retorna um produto por ID.
+        ///  Necessário se autenticar.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id:guid}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Produces(typeof(Produto))]
@@ -40,7 +55,15 @@ namespace API_Marketplace.Controllers
         }
 
 
+
+        /// <summary>
+        ///Cadastrar um novo produto.
+        ///Necessário se autenticar.
+        /// </summary>
+        /// <param name="produto"></param>
+        /// <returns></returns>
         [HttpPost]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Produces(typeof(Produto))]
@@ -53,9 +76,17 @@ namespace API_Marketplace.Controllers
             return Ok(result);
         }
 
+
+        /// <summary>
+        /// Atualizar um produto.
+        ///  Necessário se autenticar.
+        /// </summary>
+        /// <param name="produto"></param>
+        /// <returns></returns>
         [HttpPut]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]     
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Update(Produto produto)
         {
             if (produto == null) return BadRequest();
@@ -65,7 +96,16 @@ namespace API_Marketplace.Controllers
             return Ok(result);
         }
 
+
+
+        /// <summary>
+        /// Deletar um produto. 
+        /// Necessário se autenticar.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id:guid}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Delete(Guid id)

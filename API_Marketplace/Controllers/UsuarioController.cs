@@ -16,6 +16,12 @@ namespace API_Marketplace.Controllers
             _usuarioRepository = usuarioRepository;
         }
 
+
+        /// <summary>
+        /// Criar um novo usuário.
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
