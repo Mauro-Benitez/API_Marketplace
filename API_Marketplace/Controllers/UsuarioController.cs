@@ -24,6 +24,8 @@ namespace API_Marketplace.Controllers
         {
             if (usuario == null) return BadRequest();
 
+
+
             var result = _usuarioRepository.NovoUsuario(usuario);
 
             return Ok(result);

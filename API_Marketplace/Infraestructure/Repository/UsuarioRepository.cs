@@ -13,7 +13,7 @@ namespace API_Marketplace.Infraestructure.Repository
         }
 
         public Usuario NovoUsuario(Usuario usuario)
-        {
+        {      
             _context.Add(usuario);
             _context.SaveChanges();
 

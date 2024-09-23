@@ -20,7 +20,7 @@ namespace API_Marketplace.Domain.Services
 
         public string GetToken(Usuario usuario)
         {
-            var result = _context.Usuarios.Any(u => u.Equals(usuario));
+            var result = _context.Usuarios.Any(u => u.UserName == usuario.UserName && u.Senha == usuario.Senha);
 
             if(!result)
             {
