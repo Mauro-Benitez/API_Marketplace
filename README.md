@@ -1,4 +1,4 @@
-# API MarcketPlace
+# API MarketPlace
 
 ## Technologies and practices
 - .NET 8
